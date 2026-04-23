@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Корзина - GretskieOreshkiShop{% endblock %}
+
+{% block content %}
+<h1>Корзина</h1>
+{% if cart_items %}
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Товар</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.price }} ₽</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.total_price }} ₽</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-end"><strong>Итого:</strong></td>
+                    <td><strong>{{ cart_total }} ₽</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+{% else %}
+    <p>Ваша корзина пуста</p>
+    <a href="{% url 'catalog' %}" class="btn btn-success">Перейти в каталог</a>
+{% endif %}
+{% endblock %}
